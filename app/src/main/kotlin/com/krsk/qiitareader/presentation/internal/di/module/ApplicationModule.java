@@ -1,6 +1,8 @@
 package com.krsk.qiitareader.presentation.internal.di.module;
 
 import com.krsk.qiitareader.BuildConfig;
+import com.krsk.qiitareader.data.cache.ItemCache;
+import com.krsk.qiitareader.data.cache.ItemMemoryCache;
 import com.krsk.qiitareader.data.executor.JobExecutor;
 import com.krsk.qiitareader.data.repository.ItemDataRepository;
 import com.krsk.qiitareader.domain.executor.PostExecutionThread;
@@ -57,5 +59,10 @@ public class ApplicationModule {
     @Provides @Singleton
     ItemRepository provideItemRepository(ItemDataRepository itemDataRepository) {
         return itemDataRepository;
+    }
+
+    @Provides @Singleton
+    ItemCache provideItemCache(ItemMemoryCache itemMemoryCache) {
+        return itemMemoryCache;
     }
 }
