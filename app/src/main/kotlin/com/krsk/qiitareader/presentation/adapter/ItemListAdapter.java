@@ -98,10 +98,10 @@ public class ItemListAdapter extends RecyclerView.Adapter {
         public void bind(Item item) {
             this.item = item;
 
-            this.title.setText(item.title);
+            this.title.setText(item.getTitle());
 
-            if (!TextUtils.isEmpty(item.user.profileImageUri)) {
-                Picasso.with(itemView.getContext()).load(item.user.profileImageUri).into(userIcon);
+            if (!TextUtils.isEmpty(item.getUser().getProfileImageUri())) {
+                Picasso.with(itemView.getContext()).load(item.getUser().getProfileImageUri()).into(userIcon);
             }
         }
     }

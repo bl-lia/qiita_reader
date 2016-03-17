@@ -67,7 +67,7 @@ public class ItemListPresenter implements Presenter {
         final CustomTabsIntent intent = new CustomTabsIntent.Builder()
                                                             .setShowTitle(true)
                                                             .build();
-        intent.launchUrl(fragment.getActivity(), Uri.parse(item.url));
+        intent.launchUrl(fragment.getActivity(), Uri.parse(item.getUrl()));
     }
 
 }
