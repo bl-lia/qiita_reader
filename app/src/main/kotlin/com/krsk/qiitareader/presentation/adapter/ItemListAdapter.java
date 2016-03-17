@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.krsk.qiitareader.R;
 import com.krsk.qiitareader.domain.model.entity.Item;
+import com.krsk.qiitareader.presentation.adapter.viewholder.ItemViewHolder;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -46,7 +47,7 @@ public class ItemListAdapter extends RecyclerView.Adapter {
             final ItemViewHolder viewHolder = (ItemViewHolder) holder;
 
             viewHolder.bind(item);
-            viewHolder.clickActionObservable.subscribe(itemPublishSubject);
+            viewHolder.getClickActionObservable().subscribe(itemPublishSubject);
         }
     }
 
@@ -63,46 +64,5 @@ public class ItemListAdapter extends RecyclerView.Adapter {
         this.items.clear();
         this.items.addAll(items);
         notifyDataSetChanged();
-    }
-
-    static class ItemViewHolder extends RecyclerView.ViewHolder {
-
-        @Bind(R.id.item_title) TextView title;
-        @Bind(R.id.item_user_image) ImageView userIcon;
-
-        @Nullable private Item item;
-
-        private final Observable<Item> clickActionObservable = Observable.create(new Observable.OnSubscribe<Item>() {
-            @Override
-            public void call(final Subscriber<? super Item> subscriber) {
-                itemView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if (item != null) {
-                            subscriber.onNext(item);
-                        }
-                    }
-                });
-            }
-        });
-
-        public static ItemViewHolder newInstance(View parent) {
-            return new ItemViewHolder(parent);
-        }
-
-        public ItemViewHolder(View itemView) {
-            super(itemView);
-            ButterKnife.bind(this, itemView);
-        }
-
-        public void bind(Item item) {
-            this.item = item;
-
-            this.title.setText(item.getTitle());
-
-            if (!TextUtils.isEmpty(item.getUser().getProfileImageUri())) {
-                Picasso.with(itemView.getContext()).load(item.getUser().getProfileImageUri()).into(userIcon);
-            }
-        }
     }
 }
