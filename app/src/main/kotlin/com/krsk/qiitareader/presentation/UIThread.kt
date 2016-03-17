@@ -27,7 +27,9 @@ import rx.android.schedulers.AndroidSchedulers
  * which will execute actions on the Android UI thread
  */
 @Singleton
-class UIThread : PostExecutionThread {
+class UIThread
+@Inject
+constructor(): PostExecutionThread {
 
     override fun getScheduler(): Scheduler {
         return AndroidSchedulers.mainThread()
