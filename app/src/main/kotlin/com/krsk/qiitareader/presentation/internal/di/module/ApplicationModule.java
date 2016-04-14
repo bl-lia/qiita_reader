@@ -1,5 +1,6 @@
 package com.krsk.qiitareader.presentation.internal.di.module;
 
+import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.krsk.qiitareader.BuildConfig;
 import com.krsk.qiitareader.data.cache.ItemCache;
 import com.krsk.qiitareader.data.cache.ItemMemoryCache;
@@ -43,6 +44,7 @@ public class ApplicationModule {
 
         return new OkHttpClient.Builder()
                                 .addInterceptor(interceptor)
+                                .addNetworkInterceptor(new StethoInterceptor())
                                 .build();
     }
 

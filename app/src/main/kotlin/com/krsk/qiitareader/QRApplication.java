@@ -2,6 +2,7 @@ package com.krsk.qiitareader;
 
 import android.app.Application;
 
+import com.facebook.stetho.Stetho;
 import com.krsk.qiitareader.presentation.internal.di.HasComponent;
 import com.krsk.qiitareader.presentation.internal.di.component.ApplicationComponent;
 import com.krsk.qiitareader.presentation.internal.di.component.DaggerApplicationComponent;
@@ -26,5 +27,11 @@ public class QRApplication extends Application implements HasComponent<Applicati
     @Override
     public ApplicationComponent getComponent() {
         return component();
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        Stetho.initializeWithDefaults(this);
     }
 }
